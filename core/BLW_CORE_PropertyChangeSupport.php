@@ -4,12 +4,12 @@
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the BSD License.
  *
- * Copyright(c) 2006 by David Seidel. All rights reserved.
+ * Copyright(c) 2015 by David Seidel. All rights reserved.
  *
- * To contact the author write to {@link mailto:seidel.david@googlemail.com David Seidel}
- * The latest version of BlueWonder can be obtained from: {@link http://www.bluewonder-framework.de/}
+ * To contact the author write to {@link mailto:david.seidel@me.com David Seidel}
+ * The latest version of BlueWonder can be obtained from: {@link https://github.com/davidseidel/blw}
  *
- * @author David Seidel <seidel.david@googlemail.com>
+ * @author David Seidel <david.seidel@me.com>
  * @package blw.core
  */
 
@@ -19,7 +19,7 @@ BLW_CORE_ClassLoader::import('app.core.BLW_CORE_PropertyChangeListener');
 
 /**
  * @package blw.core
- * @author David Seidel <seidel.david@googlemail.com>
+ * @author David Seidel <david.seidel@me.com>
  */
 class BLW_CORE_PropertyChangeSupport {
 	/**
