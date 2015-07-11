@@ -1,36 +1,28 @@
 <?php
+BLW_CORE_ClassLoader::import("app.core.BLW_CORE_Assert");
+
 abstract class BLW_CODEGEN_CodeGenerator {
 	protected $attributes = null;
-	protected $tag_name = null;
-	protected $unique_id = null;
-	/**
-	 * 
-	 *
-	 * @var BLW_CODEGEN_PageContainer
-	 */
-	protected $page_container = null;
+	protected $tagName = null;
+	protected $uniqueId = null;
+	protected $pageClassGenerator = null;
 	protected $src = null;
 	protected $parent_var = null;
-	static $VIEW_ROOT = '$view_root';
-	static $PAGE_CONTEXT = '$page_context'; 
+	static $VARNAME_VIEW_ROOT = '$view_root';
+	static $VARNAME_PAGE_CONTEXT = '$page_context'; 
 	
-	public final function __construct(BLW_CODEGEN_PageContainer $page_container, $unique_id, $tag_name) {
+	public final function __construct(BLW_CODEGEN_PageClassGenerator $pageClassGenerator, $uniqueId, $tagName) {
 		// store code-compiler
-		$this->page_container = $page_container;
-		
-		// store unique_id
-		if(!is_null($unique_id) && strlen(trim($unique_id)) > 0) {
-			$this->unique_id = $unique_id;
-		} else {
-			throw new Exception ('Empty unique id found!!!');
-		}
+		$this->pageClassGenerator = $pageClassGenerator;
+				
+		// store uniqueId
+		BLW_CORE_Assert::notNullOrEmptyString("uniqueId", $uniqueId);
+		$this->uniqueId = $uniqueId;
 		
 		// store tag_name
-		if(!is_null($tag_name) && strlen(trim($tag_name)) > 0) {
-			$this->tag_name = $tag_name;
-		} else {
-			throw new Exception ('Empty tag name found!!!');
-		}
+		BLW_CORE_Assert::notNullOrEmptyString("tagName", $tagName);
+		$this->tagName = $tagName;
+		
 		
 		// init storage for attributes
 		$this->attributes = new ArrayObject();
@@ -73,15 +65,15 @@ abstract class BLW_CODEGEN_CodeGenerator {
 	}
 	
 	public function setTagName($name) {
-		$this->tag_name = $name;
+		$this->tagName = $name;
 	}
 	
 	public function getTagName() {
-		return $this->tag_name;
+		return $this->tagName;
 	}
 	
 	public function getUniqueId() {
-		return $this->unique_id;
+		return $this->uniqueId;
 	}
 	
 	abstract public function getObjectName();

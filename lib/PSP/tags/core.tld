@@ -5,7 +5,6 @@
 	<tag>
 		<name>useBean</name>
 		<tagclass>app.lib.PSP.tags.core.useBeanTag</tagclass>
-		<teiclass>app.lib.PSP.tags.core.useBeanTag_Info</teiclass>
 		<info>Imports a Bean.</info>
 		<attribute>
 			<name>id</name>
@@ -23,7 +22,6 @@
 	<tag>
 		<name>setProperty</name>
 		<tagclass>app.lib.PSP.tags.core.setPropertyTag</tagclass>
-		<teiclass>app.lib.PSP.tags.core.setPropertyTag_Info</teiclass>
 		<info>Imports a Bean.</info>
 		<attribute>
 			<name>name</name>

@@ -1,6 +1,6 @@
 <?php
 BLW_CORE_ClassLoader::import('app.lib.codegen.BLW_CODEGEN_TemplateParser');
-BLW_CORE_ClassLoader::import('app.lib.codegen.BLW_CODEGEN_PageContainer');
+BLW_CORE_ClassLoader::import('app.lib.codegen.BLW_CODEGEN_PageClassGenerator');
 BLW_CORE_ClassLoader::import('app.lib.codegen.BLW_CODEGEN_DirectiveCodeGenerator');
 BLW_CORE_ClassLoader::import('app.lib.codegen.BLW_CODEGEN_TagOpenCodeGenerator');
 BLW_CORE_ClassLoader::import('app.lib.codegen.BLW_CODEGEN_TagCloseCodeGenerator');
@@ -19,7 +19,7 @@ class BLW_CODEGEN_CodeCompiler {
 		$tpl_parser = new BLW_CODEGEN_TemplateParser($src);
 		$code_struct = $tpl_parser->parse();
 		
-		$page_container = new BLW_CODEGEN_PageContainer();
+		$page_container = new BLW_CODEGEN_PageClassGenerator();
 		$i = 0;
 		foreach($code_struct as $code_segment) {
 			$code_generator = null;

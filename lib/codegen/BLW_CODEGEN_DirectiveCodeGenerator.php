@@ -8,17 +8,17 @@ class BLW_CODEGEN_DirectiveGenerator extends BLW_CODEGEN_CodeGenerator {
 		switch ($this->getTagName()) {
 			case 'page' : {
 				if(!is_null($this->getAttributeByName('name'))) {
-					$this->page_container->setName($this->getAttributeByName('name'));
+					$this->pageClassGenerator->setName($this->getAttributeByName('name'));
 				}
 				
 				if(!is_null($this->getAttributeByName('info'))) {
-					$this->page_container->setInfo($this->getAttributeByName('info'));
+					$this->pageClassGenerator->setInfo($this->getAttributeByName('info'));
 				}
 				
 				if(!is_null($this->getAttributeByName('import'))) {
 					$imports = explode(',', $this->getAttributeByName('import'));
 					foreach ($imports as $import) {
-						$this->page_container->addImportStatement('BLW_CORE_ClassLoader::import(\''.$import.'\');'."\n");
+						$this->pageClassGenerator->addImportStatement('BLW_CORE_ClassLoader::import(\''.$import.'\');'."\n");
 					}
 				}
 				break;
@@ -33,14 +33,14 @@ class BLW_CODEGEN_DirectiveGenerator extends BLW_CODEGEN_CodeGenerator {
 				}
 				
 				if(!is_null($this->getAttributeByName('prefix'))) {
-					$this->page_container->addTagLib($tag_lib, $this->getAttributeByName('prefix'));
+					$this->pageClassGenerator->addTagLib($tag_lib, $this->getAttributeByName('prefix'));
 				} else {
 					throw new Exception('Attribute "uri" is required!!!');
 				}
 				
 				$tags = $tag_lib->getTags();
 				foreach ($tags as $tag) {
-					$this->page_container->addImportStatement('BLW_CORE_ClassLoader::import(\''.$tag->getImportString().'\');'."\n");
+					$this->pageClassGenerator->addImportStatement('BLW_CORE_ClassLoader::import(\''.$tag->getImportString().'\');'."\n");
 				}
 				break;
 			}

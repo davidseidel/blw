@@ -10,7 +10,7 @@ class BLW_CODEGEN_TagCloseCodeGenerator extends BLW_CODEGEN_CodeGenerator {
 		
 		$code.= $this->getParent().'->doEndTag();'."\n";
 		
-		$this->page_container->addServiceStatement($code);
+		$this->pageClassGenerator->addServiceStatement($code);
 	}
 }
 ?>

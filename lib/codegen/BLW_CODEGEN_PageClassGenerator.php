@@ -1,20 +1,20 @@
 <?php
 BLW_CORE_ClassLoader::import('app.lib.codegen.BLW_CODEGEN_TagLibInfo');
-class BLW_CODEGEN_PageContainer {
-	protected $init_stmts = null;
-	protected $import_stmts = null;
-	protected $service_stmts = null;
-	protected $destroy_stmts = null;
+class BLW_CODEGEN_PageClassGenerator {
+	protected $initStatements = null;
+	protected $importStatements = null;
+	protected $serviceStatements = null;
+	protected $destroyStatements = null;
 	protected $name = null;
 	protected $info = null;
 	protected $taglibs = null;
 	
 	public function __construct() {
 		$this->taglibs = new ArrayObject();
-		$this->init_stmts = new ArrayObject();
-		$this->import_stmts = new ArrayObject();
-		$this->service_stmts = new ArrayObject();
-		$this->destroy_stmts = new ArrayObject();
+		$this->initStatements = new ArrayObject();
+		$this->importStatements = new ArrayObject();
+		$this->serviceStatements = new ArrayObject();
+		$this->destroyStatements = new ArrayObject();
 	}
 	
 	public function addTagLib(BLW_CODEGEN_TagLibInfo $taglib, $prefix) {
@@ -41,19 +41,19 @@ class BLW_CODEGEN_PageContainer {
 	}
 	
 	public function addServiceStatement($src) {
-		return $this->service_stmts->append($src);
+		return $this->serviceStatements->append($src);
 	}
 	
 	public function addImportStatement($src) {
-		return $this->import_stmts->append($src);	
+		return $this->importStatements->append($src);	
 	}
 	
 	public function addInitStatement($src) {
-		return $this->init_stmts->append($src);	
+		return $this->initStatements->append($src);	
 	}
 	
 	public function addDestroyStatement($src) {
-		return $this->destroy_stmts->append($src);	
+		return $this->destroyStatements->append($src);	
 	}
 	
 	public function isNamespaceRegistered($prefix) {
@@ -64,14 +64,14 @@ class BLW_CODEGEN_PageContainer {
 	}
 	
 	public function processClassTemplate($src) {
-		$inits = $this->init_stmts;
+		$inits = $this->initStatements;
 		$inits->append('$this->setName(\''.$this->name.'\');'."\n");
 		$inits->append('$this->setInfo(\''.$this->info.'\');'."\n");
 		
 		$src = str_replace('#{classname}', $this->name, $src);
 		
 		$import_str = '';
-		foreach ($this->import_stmts as $import_stmt) {
+		foreach ($this->importStatements as $import_stmt) {
 			$import_str.= $import_stmt;
 		}
 		$src = str_replace('#{import}', $import_str, $src);
@@ -83,13 +83,13 @@ class BLW_CODEGEN_PageContainer {
 		$src = str_replace('#{init}', $init_str, $src);
 		
 		$service_str = '';
-		foreach ($this->service_stmts as $service_stmt) {
+		foreach ($this->serviceStatements as $service_stmt) {
 			$service_str.= $service_stmt;
 		}
 		$src = str_replace('#{service}', $service_str, $src);
 		
 		$destroy_str = '';
-		foreach ($this->destroy_stmts as $destroy_stmt) {
+		foreach ($this->destroyStatements as $destroy_stmt) {
 			$destroy_str.= $destroy_stmt;
 		}
 		$src = str_replace('#{destroy}', $destroy_str, $src);

@@ -17,16 +17,16 @@ class BLW_CODEGEN_TagOpenCodeGenerator extends BLW_CODEGEN_CodeGenerator {
 		$tag_struct = explode(':', $this->getTagName());
 		
 		// load tag info
-		$tag_info = $this->page_container->getTagInfo($tag_struct[0], $tag_struct[1]);
+		$tag_info = $this->pageClassGenerator->getTagInfo($tag_struct[0], $tag_struct[1]);
 		
 		// check if the namespace is registered
-		if(!$this->page_container->isNamespaceRegistered($tag_struct[0])) {
+		if(!$this->pageClassGenerator->isNamespaceRegistered($tag_struct[0])) {
 			throw new BLW_CODEGEN_UnboundNamespaceException($tag_struct[1]);
 		}
 		
 		// write init code for tag
 		$code.= $this->getObjectName().' = new '.$tag_info->getTagClass().'();'."\n";
-		$code.= $this->getObjectName().'->setPageContext('.self::$PAGE_CONTEXT.');'."\n";
+		$code.= $this->getObjectName().'->setPageContext('.self::$VARNAME_PAGE_CONTEXT.');'."\n";
 		$code.= $this->getObjectName().'->setParent('.$this->getParent().');'."\n";
 		if($this->getAttributeByName('id') != null) {
 			$code.= $this->getObjectName().'->setId("'.addslashes($this->getAttributeByName('id')).'");'."\n";
@@ -45,7 +45,7 @@ class BLW_CODEGEN_TagOpenCodeGenerator extends BLW_CODEGEN_CodeGenerator {
 		$code.= $this->getObjectName().'->doStartTag();'."\n";
 		
 		
-		$this->page_container->addServiceStatement($code);
+		$this->pageClassGenerator->addServiceStatement($code);
 	}
 }
 ?>
