@@ -18,9 +18,10 @@ if(strlen($path_info) > 0) {
 	$class_file_name = $ini_file->getValue('template', 'class_path').DIRECTORY_SEPARATOR.$page_name.".php";
 	$template_file_name = $ini_file->getValue('template', 'template_path').DIRECTORY_SEPARATOR.$page_name.".psp";
 	
+	// Check if template is compiled and the generated class is up-to-date.
 	if(!file_exists($class_file_name) || (filemtime($class_file_name) < filemtime($template_file_name)) ) {
+		// compile and write class file
 		$compiler = new BLW_CODEGEN_CodeCompiler();
-		
 		$src = $compiler->process(file_get_contents($template_file_name));
 		$class_file = fopen($class_file_name, "w");
 		fwrite($class_file, $src, strlen($src));
