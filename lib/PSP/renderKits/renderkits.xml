@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<render-kits>
+	<render-kit>
+	    <render-kit-id>HTML_Simple</render-kit-id>
+	    <render-kit-class>
+			app.lib.PSP.renderKits.html.BLW_PSP_HTMLRenderKit
+	    </render-kit-class>
+	</render-kit>
+</render-kits>

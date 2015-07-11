@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib>
+	<shortname>component</shortname>
+	<version>0.1</version>
+	<tag>
+		<name>button</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UICommandButton</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UICommandButton_Info</teiclass>
+		<info>Draws a button.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>linkButton</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UICommandLink</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UICommandLink_Info</teiclass>
+		<info>Draws a link with an action.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>panel</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UIPanel</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UIPanel_Info</teiclass>
+		<info>Draws a panel.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>form</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UIForm</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UIForm_Info</teiclass>
+		<info>Draws a form.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>inputTextArea</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UIInputTextArea</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UIInputTextArea_Info</teiclass>
+		<info>Draws a multiline input field.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>inputTextarea</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UIInputTextArea</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UIInputTextArea_Info</teiclass>
+		<info>Draws a multiline input field.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>inputText</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UIInputText</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UIInputText_Info</teiclass>
+		<info>Draws a single line input field.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>message</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UIMessage</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UIMessage_Info</teiclass>
+		<info>displays a message for a component.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+	<tag>
+		<name>inputSecret</name>
+		<tagclass>app.lib.PSP.components.BLW_PSP_UIInputSecret</tagclass>
+		<teiclass>app.lib.PSP.components.BLW_PSP_UIInputSecret_Info</teiclass>
+		<info>Draws a single line password input field.</info>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+		</attribute>
+	</tag>
+</taglib>

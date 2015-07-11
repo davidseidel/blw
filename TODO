@@ -1,0 +1,15 @@
+Misc
+-------------------
+- add UIDataListComponent
+- rewrite O/R-Mapper:
+    - add transaction-support
+
+BLW_HTTP_Request
+-------------------
+- add methods for Language-Support: getPrimaryAcceptedLanguage(), getAcceptedLanguages()
+- add methods for Character-Encoding: getPrimaryAcceptedEncoding(), getAcceptedEncodings()
+- add methods for Accepted Content Types: getPrimaryAcceptedContentType(), getAcceptedContentTypes(), isContentTypeAccepted($content_type)
+
+BLW_CODEGEN_TemplateParser
+-------------------
+- check documents for unbalanced Tags
