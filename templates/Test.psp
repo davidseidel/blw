@@ -1,13 +1,13 @@
 <%@ page name="MeineTestPage" 
     info="Meine Testseite" 
-    import="app.beans.visibleSwitcher" %>
+    import="app.beans.VisibilityToggler" %>
 <%@ taglib uri="lib/PSP/tags/core.tld" prefix="core" %>
 <%@ taglib uri="lib/PSP/tags/validator.tld" prefix="v" %>
 <%@ taglib uri="lib/PSP/components/component.tld" prefix="com" %>
 <html>
 	<body>
 		<p>
-			<core:useBean id="visible" scope="session" class="visibleSwitcher" />
+			<core:useBean id="visible" scope="session" class="VisibilityToggler" />
 			<core:setProperty name="visible" property="id" value="comment" />
 			<com:form id="myForm">
 				<com:panel id="login_panel" style="border:5px solid red;width:200px">
@@ -26,7 +26,7 @@
 				</com:panel>  
 			</com:form>
 			<com:form id="comment_form">
-				<com:linkButton validate="false" id="comment_button" action="visibleSwitcher::switchVisible">Help</com:linkButton>
+				<com:linkButton validate="false" id="comment_button" action="VisibilityToggler::switchVisible">Help</com:linkButton>
 				<com:panel id="panel4">
 						<com:inputTextarea visible="false" cols="30" rows="5" id="comment" value="Please type in a valid email-adress and a password and press login-button to perform login" style="width:200px" />
 				</com:panel>

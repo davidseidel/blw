@@ -127,10 +127,12 @@ class BLW_PSP_FacesContext {
 				}
 			}
 		} else {
-			$messages_for_client_id = $this->messages->offsetGet($client_id);
-			if($messages_for_client_id instanceof ArrayObject) {
-				foreach ($messages_for_client_id as $message) {
-					$ret->append($message);
+			if($this->messages->offsetExists($client_id)) {
+				$messages_for_client_id = $this->messages->offsetGet($client_id);
+				if($messages_for_client_id instanceof ArrayObject) {
+					foreach ($messages_for_client_id as $message) {
+						$ret->append($message);
+					}
 				}
 			}
 		}

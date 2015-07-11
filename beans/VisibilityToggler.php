@@ -1,6 +1,6 @@
 <?php
 BLW_CORE_ClassLoader::import('app.lib.PSP.BLW_PSP_Bean');
-class visibleSwitcher extends BLW_PSP_Bean {
+class VisibilityToggler extends BLW_PSP_Bean {
 	protected static $id = null;
 	public function onInit() { }
 	
