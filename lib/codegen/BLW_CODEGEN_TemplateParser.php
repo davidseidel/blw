@@ -1,9 +1,11 @@
 <?php
 /**
+ * Class to parse PSP-Templates.
+ *  
  * @author David Seidel
  */
 class BLW_CODEGEN_TemplateParser {
-	protected $source = null;
+	private $source = null;
 	const DIRECTIVE = 0;
 	const TAG_OPEN = 1;
 	const TAG_CLOSE = 2;
@@ -32,29 +34,28 @@ class BLW_CODEGEN_TemplateParser {
 		// storage for the matches
 		$matches = array();
 		
-		// parse expressions
+		// parse the template
 		preg_match_all($pattern, $this->source, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE);
-		
 		
 		// now the matches will be stored with their type and the static-content will be added 
 		// storage for the parsed content
 		$content = new ArrayObject();
 		
 		// set the offset to the start off the source
-		$actual_offset = 0;
+		$offsetOfLastMatch = 0;
 		
 		// iterate every match
 		foreach($matches as $match) {
 			// iterate every the off match
 			foreach(array_keys($patterns) as $pattern_name) {
-				// if the match is of this type store 
-				// the static-content between the last offset and the start off the match
-				// and the match with its type
-				if(preg_match('/'.$patterns[$pattern_name].'/sU', trim($match[0][0]))) {
-					if($actual_offset != $match[0][1]) {
-						$content_entry = array('type' => self::STATIC_CONTENT, 'source' => substr($this->source, $actual_offset, $match[0][1] - $actual_offset));
+				$foundMatch = $match[0][0];
+				if(preg_match('/'.$patterns[$pattern_name].'/sU', trim($foundMatch))) {
+					// Because we found a match, store the static content(means: no PSP-Tags inside) between the last match and the current one
+					$offsetOfCurrentMatch = $match[0][1];
+					if($offsetOfLastMatch != $offsetOfCurrentMatch) {
+						$content_entry = array('type' => self::STATIC_CONTENT, 'source' => substr($this->source, $offsetOfLastMatch, $offsetOfCurrentMatch - $offsetOfLastMatch));
 						$content->append($content_entry);
-						$actual_offset = $match[0][1];
+						$offsetOfLastMatch = $offsetOfCurrentMatch;
 					}
 					
 					// init storage for attributes and $tag_name
@@ -66,7 +67,7 @@ class BLW_CODEGEN_TemplateParser {
 						case self::DIRECTIVE : {
 							// lookup tag-name
 							$regex = '=<%@ ([a-zA-Z]+) (.*) %>=sU';
-							preg_match($regex, $match[0][0], $sub_patterns);
+							preg_match($regex, $foundMatch, $sub_patterns);
 							//store tag-name
 							$tag_name = $sub_patterns[1];
 							
@@ -86,7 +87,7 @@ class BLW_CODEGEN_TemplateParser {
 						case self::TAG_OPEN : {
 							// lookup tag-name
 							$regex = '=<([a-zA-Z]+:[a-zA-Z]+) (.*)>=sU';
-							preg_match($regex, $match[0][0], $sub_patterns);
+							preg_match($regex, $foundMatch, $sub_patterns);
 							$tag_struct = explode(':', $sub_patterns[1]);
 							
 							//store tag-name
@@ -108,7 +109,7 @@ class BLW_CODEGEN_TemplateParser {
 						case self::TAG_CLOSE : {
 							// lookup tag-name
 							$regex = '=</([a-zA-Z]+:[a-zA-Z]+)>=sU';
-							preg_match($regex, $match[0][0], $sub_patterns);
+							preg_match($regex, $foundMatch, $sub_patterns);
 							$tag_name = $sub_patterns[1];
 							break;
 						}
@@ -116,7 +117,7 @@ class BLW_CODEGEN_TemplateParser {
 						case self::TAG_EMPTY : {
 							// lookup tag-name
 							$regex = '=<([a-zA-Z]+:[a-zA-Z]+) (.*)/>=sU';
-							preg_match($regex, $match[0][0], $sub_patterns);
+							preg_match($regex, $foundMatch, $sub_patterns);
 							$tag_name = $sub_patterns[1];
 							
 							// extract attributes
@@ -140,20 +141,20 @@ class BLW_CODEGEN_TemplateParser {
 					// append the tag to the content-array
 					$content_entry = array(
 										'type' => $pattern_name, 
-										'source' => $match[0][0],
+										'source' => $foundMatch,
 										'name' => $tag_name,
 										'attributes' => $attributes);
 					$content->append($content_entry);
 					
 					// set the new offset to the end of the match
-					$actual_offset = $match[0][1] + strlen($match[0][0]);
+					$offsetOfLastMatch = $offsetOfCurrentMatch + strlen($foundMatch);
 				}
 			}
 		}
 		
 		// store the static-content between the last match and the end of the source
-		if($actual_offset < strlen($this->source)) {
-			$content_entry = array('type' => self::STATIC_CONTENT, 'source' => substr($this->source, $actual_offset, strlen($this->source) - $actual_offset));
+		if($offsetOfLastMatch < strlen($this->source)) {
+			$content_entry = array('type' => self::STATIC_CONTENT, 'source' => substr($this->source, $offsetOfLastMatch, strlen($this->source) - $offsetOfLastMatch));
 			$content->append($content_entry);
 		}
 		

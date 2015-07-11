@@ -39,7 +39,7 @@ class BLW_CORE_ClassLoader {
 			// get the root-directory for import
 			$start_point = array_shift($import_struct);
 			switch($start_point) {
-				// 'app' means the root-directory of the application
+				// 'app' is an alias for root-directory of the application
 				case 'app' : {
 					$class_file_name = BLW_CORE_ApplicationContext::getBasePath();
 					break;

@@ -1,5 +1,5 @@
-<%@ page name="MeineTestPage" 
-    info="Meine Testseite" 
+<%@ page name="TestPage" 
+    info="My Testpage" 
     import="app.beans.VisibilityToggler" %>
 <%@ taglib uri="lib/PSP/tags/core.tld" prefix="core" %>
 <%@ taglib uri="lib/PSP/tags/validator.tld" prefix="v" %>
