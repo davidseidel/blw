@@ -215,29 +215,6 @@ class BLW_PSP_PageContext implements BLW_PSP_StateChangeListener {
 		}
 		return $value;
 	}
-
-	/**
-	 * stores the actual session
-	 *
-	 * @return bool
-	 */
-	public function saveViewState() {
-		$session = $this->getSession();
-		return $session->setAttribute($this->page->getName().'_'.self::TAG_ATTR_SESSION_KEY, $this->tag_attributes);
-	}
-	
-	/**
-	 * loads the session
-	 *
-	 */
-	public function loadViewState() {
-		// get the attributes which are stored in the session
-		$session = $this->getSession();
-		$session_attr = $session->getAttribute($this->page->getName().'_'.self::TAG_ATTR_SESSION_KEY);
-		if(!is_null($session_attr)) {
-			$this->tag_attributes = $session->getAttribute($this->page->getName().'_'.self::TAG_ATTR_SESSION_KEY);
-		}
-	}
 	
 	/**
 	 * called during the attemp to clone this object. This method allways throws an exception.
