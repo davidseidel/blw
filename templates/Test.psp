@@ -6,7 +6,7 @@
 <%@ taglib uri="lib/PSP/components/component.tld" prefix="com" %>
 <html>
 	<body>
-		<p>
+	<p>
 			<core:useBean id="visible" scope="session" class="VisibilityToggler" />
 			<core:setProperty name="visible" property="id" value="comment" />
 			<com:form id="myForm">

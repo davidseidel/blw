@@ -47,7 +47,7 @@ class #{classname} extends BLW_PSP_Page {
 		$view_root->getOutput();
 		
 		// set state to render_view
-		$state_manager->changeState(BLW_PSP_StateManager::SAVE_SESSION);
+		$state_manager->changeState(BLW_PSP_StateManager::SEND_RESPONSE);
 	}
 	
 	public function destroy() {

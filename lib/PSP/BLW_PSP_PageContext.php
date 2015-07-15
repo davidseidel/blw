@@ -135,22 +135,10 @@ class BLW_PSP_PageContext implements BLW_PSP_StateChangeListener {
 	 * @param BLW_PSP_StateChangeEvent $event
 	 */
 	public function perform(BLW_PSP_StateChangeEvent $event) {
-		switch ($event->getOldState()) {
-			case BLW_PSP_StateManager::RENDER_VIEW : {
+		switch ($event->getNewState()) {
+			case BLW_PSP_StateManager::SEND_RESPONSE : {
 				$this->getResponse()->getWriter()->flush();
 				$this->getResponse()->send();
-				break;
-			}
-		}
-		
-		switch ($event->getNewState()) {
-			case BLW_PSP_StateManager::LOAD_SESSION : {
-				$this->loadViewState();
-				break;
-			}
-			
-			case BLW_PSP_StateManager::SAVE_SESSION : {
-				$this->saveViewState();
 				break;
 			}
 		}

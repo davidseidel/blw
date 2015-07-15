@@ -65,7 +65,7 @@ class BLW_PSP_StateManager {
 	 * store the session
 	 *
 	 */
-	const SAVE_SESSION = 60;
+	const SEND_RESPONSE = 60;
 	
 	/**
 	 * marks the actual state
